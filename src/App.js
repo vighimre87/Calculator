@@ -9,6 +9,7 @@ import Units from "./pages/Units/index";
 
 // import components
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="currency" element={<Currency />} />
           <Route path="Units" element={<Units />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );
