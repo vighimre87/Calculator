@@ -10,10 +10,10 @@ function Header() {
             <Toolbar>
               <CalculateIcon />
               <Tabs sx={{marginLeft: 'auto'}} textColor='inherit'>
-                <Tab label='Home'></Tab>
-                <Tab label='Calculator'></Tab>
-                <Tab label='Currency'></Tab>
-                <Tab label='Units'></Tab>
+                <Tab label='Home'>Home</Tab>
+                <Tab label='Calculator'>Calculator</Tab>
+                <Tab label='Currency'>Currency</Tab>
+                <Tab label='Units'>Units</Tab>
               </Tabs>
             </Toolbar>
           </AppBar>
