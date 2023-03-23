@@ -5,19 +5,19 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 
 function Header() {
     return (
-        <header>
+        <div>
           <AppBar sx={{background: '#3F91BF'}}>
             <Toolbar>
               <CalculateIcon />
               <Tabs sx={{marginLeft: 'auto'}} textColor='inherit'>
-                <Tab label='Home'></Tab>
-                <Tab label='Calculator'></Tab>
-                <Tab label='Currency'></Tab>
-                <Tab label='Units'></Tab>
+                <Tab value={'1'} label='Home'>Home</Tab>
+                <Tab value={'2'} label='Calculator'>Calculator</Tab>
+                <Tab value={'3'} label='Currency'>Currency</Tab>
+                <Tab value={'4'} label='Units'>Units</Tab>
               </Tabs>
             </Toolbar>
           </AppBar>
-        </header>
+        </div>
     );
 }
 
