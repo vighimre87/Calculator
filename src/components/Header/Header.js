@@ -5,7 +5,7 @@ import CalculateIcon from '@mui/icons-material/Calculate';
 
 function Header() {
     return (
-        <header>
+        <div>
           <AppBar sx={{background: '#3F91BF'}}>
             <Toolbar>
               <CalculateIcon />
@@ -17,7 +17,7 @@ function Header() {
               </Tabs>
             </Toolbar>
           </AppBar>
-        </header>
+        </div>
     );
 }
 
