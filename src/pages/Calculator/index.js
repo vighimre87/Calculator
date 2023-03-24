@@ -8,7 +8,7 @@ import "./style.css";
 function Calculator() {
     return (
         <CalculatorWrapper />
-    )
+    );
 }
 
 export default Calculator;
