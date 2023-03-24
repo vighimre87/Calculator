@@ -9,9 +9,8 @@ function Currency() {
     return (
          <div>
             <CurrencyDropdown />
-         </div>
-            
-        
+            <CurrencyDropdown />
+         </div>    
     )
 }
 
