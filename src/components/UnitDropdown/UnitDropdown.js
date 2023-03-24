@@ -30,7 +30,7 @@ function UnitDropdown(props) {
             <MenuItem
               key={option.value}
               value={option.value}
-            >{`${option.label}(${option.value})`}</MenuItem>
+            >{`${option.label}`}</MenuItem>
           ))}
       </Select>
     </FormControl>
