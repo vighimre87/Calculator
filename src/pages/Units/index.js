@@ -32,17 +32,48 @@ function Units() {
 
   // left conversion states management
   const [leftUnitOption, setLeftUnitOption] = useState("");
+  useEffect(() => {
+    console.log("leftUnitOption is changed......", leftUnitOption);
+    updateRightInput();
+  }, [leftUnitOption]);
+
   const [leftInputValue, setLeftInputValue] = useState("");
   useEffect(() => {
     console.log("leftInputValue is changed......", leftInputValue);
+    updateRightInput();
   }, [leftInputValue]);
 
   // right conversion states management
   const [rightUnitOption, setRightUnitOption] = useState("");
+  useEffect(() => {
+    console.log("rightUnitOption is changed......", rightUnitOption);
+    updateLeftInput();
+  }, [rightUnitOption]);
+
   const [rightInputValue, setRightInputValue] = useState("");
   useEffect(() => {
     console.log("rightInputValue is changed......", rightInputValue);
+    updateLeftInput();
   }, [rightInputValue]);
+
+  const isInputsValid = () => leftUnitOption && leftInputValue;
+  const updateRightInput = () => {
+    if (isInputsValid()) {
+      const newRightInputValue = convert(leftInputValue)
+        .from(leftUnitOption)
+        .to(rightUnitOption);
+      setRightInputValue(newRightInputValue);
+    }
+  };
+
+  const updateLeftInput = () => {
+    if (isInputsValid()) {
+      const newLeftInputValue = convert(rightInputValue)
+        .from(rightUnitOption)
+        .to(leftUnitOption);
+      setLeftInputValue(newLeftInputValue);
+    }
+  };
 
   // mi2
   // console.log(convert().describe("mi2"));
@@ -67,6 +98,12 @@ function Units() {
         InputLabelProps={{
           shrink: true
         }}
+        InputProps={{
+          readOnly: !leftUnitOption || !rightUnitOption
+        }}
+        helperText={
+          leftUnitOption ? "" : "Please select an unit from the dropdown menu."
+        }
         value={leftInputValue}
         onChange={(event) => {
           setLeftInputValue(event.target.value);
@@ -90,6 +127,12 @@ function Units() {
         InputLabelProps={{
           shrink: true
         }}
+        InputProps={{
+          readOnly: !leftUnitOption || !rightUnitOption
+        }}
+        helperText={
+          rightUnitOption ? "" : "Please select an unit from the dropdown menu."
+        }
         value={rightInputValue}
         onChange={(event) => {
           setRightInputValue(event.target.value);
