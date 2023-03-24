@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <div>
-        {/* <Header /> */}
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="calculator" element={<Calculator />} />
