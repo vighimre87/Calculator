@@ -5,20 +5,23 @@ import Typography from '@mui/material/Typography';
 
 function Footer() {
     return (
-        <Box component="footer"
-        sx={{
-            py: 2, 
-            backgroundColor: '#3F91BF'
-        }}>
-            <Container maxWidth="sm">
-                <Typography variant="body2" color="text.secondary" textAlign='center'>
-                    {'Copyright © Pixel Pionners '}
-                    {new Date().getFullYear()}
-                    {'.'}
-                </Typography>
-                
-            </Container>
-        </Box>
+        <footer>
+            <Box component="footer"
+                sx={{
+                    py: 2, 
+                    backgroundColor: '#3F91BF'
+                }}>
+                <Container maxWidth="sm">
+                    <Typography variant="body2" color="#f5f5f5" textAlign='center'>
+                        {'Copyright © Pixel Pionners '}
+                        {new Date().getFullYear()}
+                        {'.'}
+                    </Typography>
+                    
+                </Container>
+            </Box>
+        </footer>
+        
     )
 }
 
