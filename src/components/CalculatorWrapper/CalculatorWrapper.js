@@ -1,8 +1,8 @@
 import React from 'react';
 
- function CalculatorWrapper() {
+ function CalculatorWrapper({children}) {
     return (<div className='calcWrapper'>
-
+      {children}
     </div>);
  }
  
