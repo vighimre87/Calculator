@@ -28,6 +28,7 @@ function UnitDropdown(props) {
         {props.options &&
           props.options.map((option) => (
             <MenuItem
+              key={option.value}
               value={option.value}
             >{`${option.label}(${option.value})`}</MenuItem>
           ))}
