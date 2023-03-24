@@ -1,5 +1,6 @@
 // import libraries
 import React, { useState, useEffect } from "react";
+import TextField from "@mui/material/TextField";
 import convert from "convert-units";
 
 // import components
@@ -22,16 +23,26 @@ function Units() {
     setUnitOptions(optionName);
     setLeftUnitOption("");
     setRightUnitOption("");
+    setLeftInputValue("");
+    setRightInputValue("");
   }, [exchangeOption]);
-
-  // left dropdown state management
-  const [leftUnitOption, setLeftUnitOption] = useState("");
-
-  // right dropdown state management
-  const [rightUnitOption, setRightUnitOption] = useState("");
 
   // unit options state management
   const [unitOptions, setUnitOptions] = useState();
+
+  // left conversion states management
+  const [leftUnitOption, setLeftUnitOption] = useState("");
+  const [leftInputValue, setLeftInputValue] = useState("");
+  useEffect(() => {
+    console.log("leftInputValue is changed......", leftInputValue);
+  }, [leftInputValue]);
+
+  // right conversion states management
+  const [rightUnitOption, setRightUnitOption] = useState("");
+  const [rightInputValue, setRightInputValue] = useState("");
+  useEffect(() => {
+    console.log("rightInputValue is changed......", rightInputValue);
+  }, [rightInputValue]);
 
   // mi2
   // console.log(convert().describe("mi2"));
@@ -48,6 +59,19 @@ function Units() {
           setExchangeOption(event.target.value);
         }}
       />
+      <TextField
+        // left input
+        id="left-number"
+        label="Number"
+        type="number"
+        InputLabelProps={{
+          shrink: true
+        }}
+        value={leftInputValue}
+        onChange={(event) => {
+          setLeftInputValue(event.target.value);
+        }}
+      />
       <UnitDropdown
         // left dropdown
         id="left-dropdown"
@@ -56,6 +80,19 @@ function Units() {
         options={unitOptions}
         handleChange={(event) => {
           setLeftUnitOption(event.target.value);
+        }}
+      />
+      <TextField
+        // right input
+        id="right-number"
+        label="Number"
+        type="number"
+        InputLabelProps={{
+          shrink: true
+        }}
+        value={rightInputValue}
+        onChange={(event) => {
+          setRightInputValue(event.target.value);
         }}
       />
       <UnitDropdown
