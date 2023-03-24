@@ -1,0 +1,31 @@
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import './Footer.css'
+
+function Footer() {
+    return (
+        <footer>
+            <Box component="footer"
+                sx={{
+                    py: 2, 
+                    backgroundColor: '#3F91BF',
+                    marginTop: 'auto',
+                }}>
+                <Container maxWidth="sm" sx={{marginTop: 'auto', marginBottom: 'auto'}}>
+                    <Typography variant="body2" color="#f5f5f5" textAlign='center'>
+                        {'Copyright © Pixel Pionners '}
+                        {new Date().getFullYear()}
+                        {'.'}
+                    </Typography>
+                    
+                </Container>
+            </Box>
+        </footer>
+        
+    )
+}
+
+
+export default Footer;
