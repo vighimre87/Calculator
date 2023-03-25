@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
 // import components
@@ -13,6 +14,7 @@ import UnitDropdown from "../../components/UnitDropdown/UnitDropdown";
 
 // import styling
 import "./style.css";
+import { CardContent } from "@mui/material";
 
 function Units() {
   // messages
@@ -173,33 +175,40 @@ function Units() {
 
           <Grid container directin="row" justifyContent="space-around">
             <Grid item>
-              <Grid container direction="column">
-                <TextField
-                  // left input
-                  sx={{ marginBottom: "20px" }}
-                  id="left-number"
-                  label="Number"
-                  type="number"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  InputProps={{
-                    readOnly: !leftUnitOption || !rightUnitOption
-                  }}
-                  helperText={leftUnitOption ? "" : selectDropDownUnitMsg}
-                  onChange={leftInputChangeHandler}
-                />
-                <UnitDropdown
-                  // left dropdown
-                  id="left-dropdown"
-                  label="Select Unit"
-                  selectedValue={leftUnitOption}
-                  options={unitOptions}
-                  handleChange={(event) => {
-                    setLeftUnitOption(event.target.value);
-                  }}
-                />
-              </Grid>
+              <Card
+                variant="outlined"
+                sx={{ backgroundColor: "rgb(240,248,255, 0.4)" }}
+              >
+                <CardContent>
+                  <Grid container direction="column">
+                    <TextField
+                      // left input
+                      sx={{ marginBottom: "20px" }}
+                      id="left-number"
+                      label="Number"
+                      type="number"
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      InputProps={{
+                        readOnly: !leftUnitOption || !rightUnitOption
+                      }}
+                      helperText={leftUnitOption ? "" : selectDropDownUnitMsg}
+                      onChange={leftInputChangeHandler}
+                    />
+                    <UnitDropdown
+                      // left dropdown
+                      id="left-dropdown"
+                      label="Select Unit"
+                      selectedValue={leftUnitOption}
+                      options={unitOptions}
+                      handleChange={(event) => {
+                        setLeftUnitOption(event.target.value);
+                      }}
+                    />
+                  </Grid>
+                </CardContent>
+              </Card>
             </Grid>
 
             <Grid item xs={12} sm={12} md="auto">
@@ -220,33 +229,40 @@ function Units() {
             </Grid>
 
             <Grid item>
-              <Grid container direction="column">
-                <TextField
-                  // right input
-                  sx={{ marginBottom: "20px" }}
-                  id="right-number"
-                  label="Number"
-                  type="number"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  InputProps={{
-                    readOnly: !leftUnitOption || !rightUnitOption
-                  }}
-                  helperText={rightUnitOption ? "" : selectDropDownUnitMsg}
-                  onChange={rightInputChangeHandler}
-                />
-                <UnitDropdown
-                  // right dropdown
-                  id="right-dropdown"
-                  label="Select Unit"
-                  selectedValue={rightUnitOption}
-                  options={unitOptions}
-                  handleChange={(event) => {
-                    setRightUnitOption(event.target.value);
-                  }}
-                />
-              </Grid>
+              <Card
+                variant="outlined"
+                sx={{ backgroundColor: "rgb(240,248,255, 0.4)" }}
+              >
+                <CardContent>
+                  <Grid container direction="column">
+                    <TextField
+                      // right input
+                      sx={{ marginBottom: "20px" }}
+                      id="right-number"
+                      label="Number"
+                      type="number"
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                      InputProps={{
+                        readOnly: !leftUnitOption || !rightUnitOption
+                      }}
+                      helperText={rightUnitOption ? "" : selectDropDownUnitMsg}
+                      onChange={rightInputChangeHandler}
+                    />
+                    <UnitDropdown
+                      // right dropdown
+                      id="right-dropdown"
+                      label="Select Unit"
+                      selectedValue={rightUnitOption}
+                      options={unitOptions}
+                      handleChange={(event) => {
+                        setRightUnitOption(event.target.value);
+                      }}
+                    />
+                  </Grid>
+                </CardContent>
+              </Card>
             </Grid>
           </Grid>
         </Grid>
