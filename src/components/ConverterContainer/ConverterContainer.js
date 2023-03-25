@@ -1,15 +1,18 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
-import { display } from '@mui/system';
+
+
 
 function ConverterContainer() {
-    return (
+
+  
+
+  return (
     <div>
       <p>From </p>
-      <CurrencyDropdown />
+      <CurrencyDropdown amount={1} currency='USD' />
       <p>To</p>
-      <CurrencyDropdown />
+      <CurrencyDropdown amount={1} currency='USD' />
     </div>
   );
 }
