@@ -247,6 +247,76 @@ export const UNITS = {
       value: "year"
     }
   ],
+  VOLUMN_UNITS: [
+    {
+      label: "Cubic Millimeter - mm3",
+      value: "mm3"
+    },
+    {
+      label: "Cubic Centimeter - cm3",
+      value: "cm3"
+    },
+    {
+      label: "Millilitre - ml",
+      value: "ml"
+    },
+    {
+      label: "Litre - l",
+      value: "l"
+    },
+    {
+      label: "Kilolitre - kl",
+      value: "kl"
+    },
+    {
+      label: "Cubic meter - m3",
+      value: "m3"
+    },
+    {
+      label: "Cubic kilometer - km3",
+      value: "km3"
+    },
+    {
+      label: "Teaspoon - tsp",
+      value: "tsp"
+    },
+    {
+      label: "Cubic Inch - Tbs",
+      value: "Tbs"
+    },
+    {
+      label: "Cubic Inch - in3",
+      value: "in3"
+    },
+    {
+      label: "Fluid Ounce - fl-oz",
+      value: "fl-oz"
+    },
+    {
+      label: "Cup - cup",
+      value: "cup"
+    },
+    {
+      label: "Pint - pnt",
+      value: "pnt"
+    },
+    {
+      label: "Quart - qt",
+      value: "qt"
+    },
+    {
+      label: "Gallon - gal",
+      value: "gal"
+    },
+    {
+      label: "Cubic Foot - ft3",
+      value: "ft3"
+    },
+    {
+      label: "Cubic yard - yd3",
+      value: "yd3"
+    }
+  ],
   MASS_UNITS: [
     {
       label: "Microgram - mcg",
