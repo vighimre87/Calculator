@@ -113,6 +113,36 @@ export const UNITS = {
       value: "rad/s"
     }
   ],
+  LENGTH_UNITS: [
+    {
+      label: "Millimeter - mm",
+      value: "mm"
+    },
+    {
+      label: "Centimeter - cm",
+      value: "cm"
+    },
+    {
+      label: "Meter - m",
+      value: "m"
+    },
+    {
+      label: "Inch - in",
+      value: "in"
+    },
+    {
+      label: "US Survey Foot - ft-us",
+      value: "ft-us"
+    },
+    {
+      label: "Foot - ft",
+      value: "ft"
+    },
+    {
+      label: "Mile - mi",
+      value: "mi"
+    }
+  ],
   MASS_UNITS: [
     {
       label: "Microgram - mcg",
