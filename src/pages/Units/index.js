@@ -1,6 +1,8 @@
 // import libraries
 import React, { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import convert from "convert-units";
 
 // import components
@@ -13,6 +15,10 @@ import { UNITS } from "../../utils/units";
 import "./style.css";
 
 function Units() {
+  // messages
+  const selectDropDownUnitMsg =
+    "Please select an unit from both dropdown menus.";
+
   // exchange option state management
   const [exchangeOption, setExchangeOption] = useState(
     UNITS.EXCHANGE_OPTIONS[0].value
@@ -56,7 +62,7 @@ function Units() {
     updateLeftInput();
   }, [rightInputValue]);
 
-  const isInputsValid = () => leftUnitOption && leftInputValue;
+  const isInputsValid = () => leftUnitOption && rightUnitOption;
   const updateRightInput = () => {
     if (isInputsValid()) {
       const newRightInputValue = convert(leftInputValue)
@@ -73,6 +79,18 @@ function Units() {
         .to(leftUnitOption);
       setLeftInputValue(newLeftInputValue);
     }
+  };
+
+  const onSwapButtonClick = () => {
+    const leftUnitOptionCurr = leftUnitOption;
+    const leftInputValueCurr = leftInputValue;
+    const rightUnitOptionCurr = rightUnitOption;
+    const rightInputValueCurr = rightInputValue;
+
+    setLeftUnitOption(rightUnitOptionCurr);
+    setLeftInputValue(rightInputValueCurr);
+    setRightUnitOption(leftUnitOptionCurr);
+    setRightInputValue(leftInputValueCurr);
   };
 
   // mi2
@@ -101,9 +119,7 @@ function Units() {
         InputProps={{
           readOnly: !leftUnitOption || !rightUnitOption
         }}
-        helperText={
-          leftUnitOption ? "" : "Please select an unit from the dropdown menu."
-        }
+        helperText={leftUnitOption ? "" : selectDropDownUnitMsg}
         value={leftInputValue}
         onChange={(event) => {
           setLeftInputValue(event.target.value);
@@ -119,6 +135,15 @@ function Units() {
           setLeftUnitOption(event.target.value);
         }}
       />
+      <IconButton
+        color="primary"
+        aria-label="upload picture"
+        component="label"
+        size="large"
+        onClick={onSwapButtonClick}
+      >
+        <SwapHorizIcon />
+      </IconButton>
       <TextField
         // right input
         id="right-number"
@@ -130,9 +155,7 @@ function Units() {
         InputProps={{
           readOnly: !leftUnitOption || !rightUnitOption
         }}
-        helperText={
-          rightUnitOption ? "" : "Please select an unit from the dropdown menu."
-        }
+        helperText={rightUnitOption ? "" : selectDropDownUnitMsg}
         value={rightInputValue}
         onChange={(event) => {
           setRightInputValue(event.target.value);
