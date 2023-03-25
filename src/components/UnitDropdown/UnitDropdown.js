@@ -5,15 +5,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-/**
- * properties:
- * id: String,
- * label: String,
- * selectedValue: String,
- * options: Object{label: String, value: String}
- * handleChange: Function
- */
-
 function UnitDropdown(props) {
   return (
     <FormControl fullWidth>
