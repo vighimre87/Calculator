@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import convert from "convert-units";
-import debounce from "lodash/debounce";
 
 // import components
 import UnitDropdown from "../../components/UnitDropdown/UnitDropdown";
@@ -30,10 +29,8 @@ function Units() {
     setUnitOptions(optionName);
     setLeftUnitOption("");
     setRightUnitOption("");
-    setLeftInputValue("");
-    setRightInputValue("");
-    updateInputValue("left", "");
     updateInputValue("right", "");
+    updateInputValue("left", "");
   }, [exchangeOption]);
 
   // unit options state management
@@ -43,46 +40,35 @@ function Units() {
   const [leftUnitOption, setLeftUnitOption] = useState("");
   useEffect(() => {
     console.log("leftUnitOption is changed......", leftUnitOption);
+    const leftInputValueCurr = getInputValue("left");
+
+    if (!leftInputValueCurr) {
+      updateInputValue("left", 0);
+    }
+
     updateRightInput();
   }, [leftUnitOption]);
-
-  const [leftInputValue, setLeftInputValue] = useState("");
-  useEffect(() => {
-    console.log("leftInputValue is changed......", leftInputValue);
-    updateRightInput();
-  }, [leftInputValue]);
 
   // right conversion states management
   const [rightUnitOption, setRightUnitOption] = useState("");
   useEffect(() => {
     console.log("rightUnitOption is changed......", rightUnitOption);
+    const rightInputValueCurr = getInputValue("right");
+
+    if (!rightInputValueCurr) {
+      updateInputValue("right", 0);
+    }
+
     updateLeftInput();
   }, [rightUnitOption]);
 
-  const [rightInputValue, setRightInputValue] = useState("");
-  useEffect(() => {
-    console.log("rightInputValue is changed......", rightInputValue);
+  const leftInputChangeHandler = (event) => {
+    updateRightInput();
+  };
+
+  const rightInputChangeHandler = (event) => {
     updateLeftInput();
-  }, [rightInputValue]);
-
-  // debounce config
-  const changeLeftInputHandler = (event) => {
-    setLeftInputValue(event.target.value);
   };
-
-  const debouncedLeftInputChangeHandler = useMemo(
-    () => debounce(changeLeftInputHandler, 300),
-    []
-  );
-
-  const changeRightInputHandler = (event) => {
-    setRightInputValue(event.target.value);
-  };
-
-  const debouncedRightInputChangeHandler = useMemo(
-    () => debounce(changeRightInputHandler, 300),
-    []
-  );
 
   // update input fields
   const isInputsValid = () => leftUnitOption && rightUnitOption;
@@ -90,36 +76,54 @@ function Units() {
     const input = document.querySelector(`#${direction}-number`);
     input.value = value;
   };
+  const getInputValue = (direction) => {
+    return +document.querySelector(`#${direction}-number`).value;
+  };
+
   const updateRightInput = () => {
+    console.log("updateRightInput.....");
     if (isInputsValid()) {
-      const newRightInputValue = convert(leftInputValue)
-        .from(leftUnitOption)
-        .to(rightUnitOption);
-      setRightInputValue(newRightInputValue);
-      updateInputValue("right", newRightInputValue);
+      const leftInputValue = getInputValue("left");
+      console.log("leftInputValue: ", leftInputValue);
+      if (leftInputValue !== "") {
+        const newRightInputValue = convert(leftInputValue)
+          .from(leftUnitOption)
+          .to(rightUnitOption);
+
+        console.log("newRightInputValue: ", newRightInputValue);
+        // setRightInputValue(newRightInputValue);
+        updateInputValue("right", newRightInputValue);
+      }
     }
   };
 
   const updateLeftInput = () => {
+    console.log("updateLeftInput.....");
+
     if (isInputsValid()) {
-      const newLeftInputValue = convert(rightInputValue)
-        .from(rightUnitOption)
-        .to(leftUnitOption);
-      setLeftInputValue(newLeftInputValue);
-      updateInputValue("left", newLeftInputValue);
+      const rightInputValue = getInputValue("right");
+      console.log("rightInputValue: ", rightInputValue);
+      if (rightInputValue !== "") {
+        const newLeftInputValue = convert(rightInputValue)
+          .from(rightUnitOption)
+          .to(leftUnitOption);
+        console.log("newLeftInputValue: ", newLeftInputValue);
+
+        updateInputValue("left", newLeftInputValue);
+      }
     }
   };
 
   const onSwapButtonClick = () => {
     const leftUnitOptionCurr = leftUnitOption;
-    const leftInputValueCurr = leftInputValue;
+    const leftInputValueCurr = getInputValue("left");
     const rightUnitOptionCurr = rightUnitOption;
-    const rightInputValueCurr = rightInputValue;
+    const rightInputValueCurr = getInputValue("right");
 
     setLeftUnitOption(rightUnitOptionCurr);
-    setLeftInputValue(rightInputValueCurr);
+    updateInputValue("right", leftInputValueCurr);
     setRightUnitOption(leftUnitOptionCurr);
-    setRightInputValue(leftInputValueCurr);
+    updateInputValue("left", rightInputValueCurr);
   };
 
   return (
@@ -146,7 +150,7 @@ function Units() {
           readOnly: !leftUnitOption || !rightUnitOption
         }}
         helperText={leftUnitOption ? "" : selectDropDownUnitMsg}
-        onChange={debouncedLeftInputChangeHandler}
+        onChange={leftInputChangeHandler}
       />
       <UnitDropdown
         // left dropdown
@@ -179,7 +183,7 @@ function Units() {
           readOnly: !leftUnitOption || !rightUnitOption
         }}
         helperText={rightUnitOption ? "" : selectDropDownUnitMsg}
-        onChange={debouncedRightInputChangeHandler}
+        onChange={rightInputChangeHandler}
       />
       <UnitDropdown
         // right dropdown
