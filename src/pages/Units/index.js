@@ -33,7 +33,6 @@ function Units() {
     exchangeOptions[0].value
   );
   useEffect(() => {
-    console.log("exchangeOption is changed.....", exchangeOption);
     const unitOptions = convert()
       .list(exchangeOption)
       .map((option) => {
@@ -56,7 +55,6 @@ function Units() {
   // left conversion states management
   const [leftUnitOption, setLeftUnitOption] = useState("");
   useEffect(() => {
-    console.log("leftUnitOption is changed......", leftUnitOption);
     const leftInputValueCurr = getInputValue("left");
 
     if (!leftInputValueCurr) {
@@ -69,7 +67,6 @@ function Units() {
   // right conversion states management
   const [rightUnitOption, setRightUnitOption] = useState("");
   useEffect(() => {
-    console.log("rightUnitOption is changed......", rightUnitOption);
     const rightInputValueCurr = getInputValue("right");
 
     if (!rightInputValueCurr) {
@@ -98,38 +95,27 @@ function Units() {
   };
 
   const updateRightInput = () => {
-    console.log("updateRightInput.....");
-    console.log("leftUnitOption: ", leftUnitOption);
-    console.log("rightUnitOption: ", rightUnitOption);
-
     if (isInputsValid()) {
       const leftInputValue = getInputValue("left");
-      console.log("leftInputValue: ", leftInputValue);
+
       if (leftInputValue !== "") {
         const newRightInputValue = convert(leftInputValue)
           .from(leftUnitOption)
           .to(rightUnitOption);
 
-        console.log("newRightInputValue: ", newRightInputValue);
-        // setRightInputValue(newRightInputValue);
         updateInputValue("right", newRightInputValue);
       }
     }
   };
 
   const updateLeftInput = () => {
-    console.log("updateLeftInput.....");
-    console.log("leftUnitOption: ", leftUnitOption);
-    console.log("rightUnitOption: ", rightUnitOption);
-
     if (isInputsValid()) {
       const rightInputValue = getInputValue("right");
-      console.log("rightInputValue: ", rightInputValue);
+
       if (rightInputValue !== "") {
         const newLeftInputValue = convert(rightInputValue)
           .from(rightUnitOption)
           .to(leftUnitOption);
-        console.log("newLeftInputValue: ", newLeftInputValue);
 
         updateInputValue("left", newLeftInputValue);
       }
