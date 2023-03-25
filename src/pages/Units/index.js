@@ -1,9 +1,11 @@
 // import libraries
 import React, { useState, useEffect } from "react";
+import convert from "convert-units";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import convert from "convert-units";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 
 // import components
 import UnitDropdown from "../../components/UnitDropdown/UnitDropdown";
@@ -128,73 +130,117 @@ function Units() {
 
   return (
     <div>
-      <UnitDropdown
-        // exchange option dropdown
-        id="exchange"
-        label="Options"
-        selectedValue={exchangeOption}
-        options={UNITS.EXCHANGE_OPTIONS}
-        handleChange={(event) => {
-          setExchangeOption(event.target.value);
+      <Box
+        sx={{
+          flexGrow: 1,
+          maxWidth: "1200px",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "10px",
+          marginLeft: "auto",
+          marginRight: "auto",
+          padding: "0 10px"
         }}
-      />
-      <TextField
-        // left input
-        id="left-number"
-        label="Number"
-        type="number"
-        InputLabelProps={{
-          shrink: true
-        }}
-        InputProps={{
-          readOnly: !leftUnitOption || !rightUnitOption
-        }}
-        helperText={leftUnitOption ? "" : selectDropDownUnitMsg}
-        onChange={leftInputChangeHandler}
-      />
-      <UnitDropdown
-        // left dropdown
-        id="left-dropdown"
-        label="Select Unit"
-        selectedValue={leftUnitOption}
-        options={unitOptions}
-        handleChange={(event) => {
-          setLeftUnitOption(event.target.value);
-        }}
-      />
-      <IconButton
-        color="primary"
-        aria-label="upload picture"
-        component="label"
-        size="large"
-        onClick={onSwapButtonClick}
       >
-        <SwapHorizIcon />
-      </IconButton>
-      <TextField
-        // right input
-        id="right-number"
-        label="Number"
-        type="number"
-        InputLabelProps={{
-          shrink: true
-        }}
-        InputProps={{
-          readOnly: !leftUnitOption || !rightUnitOption
-        }}
-        helperText={rightUnitOption ? "" : selectDropDownUnitMsg}
-        onChange={rightInputChangeHandler}
-      />
-      <UnitDropdown
-        // right dropdown
-        id="right-dropdown"
-        label="Select Unit"
-        selectedValue={rightUnitOption}
-        options={unitOptions}
-        handleChange={(event) => {
-          setRightUnitOption(event.target.value);
-        }}
-      />
+        <Grid container sx={{ padding: "20px", minHeight: "400px" }}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            sx={{ marginBottom: "20px" }}
+          >
+            <Grid item xs={8}>
+              <UnitDropdown
+                // exchange option dropdown
+                id="exchange"
+                label="Options"
+                selectedValue={exchangeOption}
+                options={UNITS.EXCHANGE_OPTIONS}
+                handleChange={(event) => {
+                  setExchangeOption(event.target.value);
+                }}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container directin="row" justifyContent="space-around">
+            <Grid item>
+              <Grid container direction="column">
+                <TextField
+                  // left input
+                  sx={{ marginBottom: "20px" }}
+                  id="left-number"
+                  label="Number"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: !leftUnitOption || !rightUnitOption
+                  }}
+                  helperText={leftUnitOption ? "" : selectDropDownUnitMsg}
+                  onChange={leftInputChangeHandler}
+                />
+                <UnitDropdown
+                  // left dropdown
+                  id="left-dropdown"
+                  label="Select Unit"
+                  selectedValue={leftUnitOption}
+                  options={unitOptions}
+                  handleChange={(event) => {
+                    setLeftUnitOption(event.target.value);
+                  }}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} sm={12} md="auto">
+              <Grid container justifyContent="center" alignItems="center">
+                <IconButton
+                  color="primary"
+                  aria-label="upload picture"
+                  component="label"
+                  size="large"
+                  onClick={onSwapButtonClick}
+                >
+                  <SwapHorizIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+
+            <Grid item>
+              <Grid container direction="column">
+                <TextField
+                  // right input
+                  sx={{ marginBottom: "20px" }}
+                  id="right-number"
+                  label="Number"
+                  type="number"
+                  InputLabelProps={{
+                    shrink: true
+                  }}
+                  InputProps={{
+                    readOnly: !leftUnitOption || !rightUnitOption
+                  }}
+                  helperText={rightUnitOption ? "" : selectDropDownUnitMsg}
+                  onChange={rightInputChangeHandler}
+                />
+                <UnitDropdown
+                  // right dropdown
+                  id="right-dropdown"
+                  label="Select Unit"
+                  selectedValue={rightUnitOption}
+                  options={unitOptions}
+                  handleChange={(event) => {
+                    setRightUnitOption(event.target.value);
+                  }}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
     </div>
   );
 }
