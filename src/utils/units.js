@@ -143,6 +143,28 @@ export const UNITS = {
       value: "mi"
     }
   ],
+  POWER_UNITS: [
+    {
+      label: "Watt - W",
+      value: "W"
+    },
+    {
+      label: "Milliwatt - mW",
+      value: "mW"
+    },
+    {
+      label: "Kilowatt - kW",
+      value: "kW"
+    },
+    {
+      label: "Megawatt - MW",
+      value: "MW"
+    },
+    {
+      label: "Gigawatt - GW",
+      value: "GW"
+    }
+  ],
   MASS_UNITS: [
     {
       label: "Microgram - mcg",
