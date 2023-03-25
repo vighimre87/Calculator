@@ -1,0 +1,22 @@
+.converter-container {
+    margin-top: 50px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.currency-group {
+    margin: 20px 20px;
+    padding: 5px;
+    background-color: gold;
+    border-radius: 20px;
+    -webkit-box-shadow: 10px 9px 5px -7px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: 10px 9px 5px -7px rgba(0, 0, 0, 0.75);
+        box-shadow: 10px 9px 5px -7px rgba(0, 0, 0, 0.75);
+}
+
+h1 {
+    text-align: center;
+    color: rgb(72, 87, 227);
+}

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
 import axios from 'axios';
-
 import { useState, useEffect } from 'react';
+
+import './ConverterContainer.css'
 
 function ConverterContainer() {
 
@@ -50,11 +51,18 @@ function ConverterContainer() {
 
 
   return (
-    <div>
-      <p>From </p>
-      <CurrencyDropdown amount={amount1} currency={currency1} onAmountChange={handleAmount1Change} onCurrencyChange={handleCurrency1Change} />
-      <p>To</p>
-      <CurrencyDropdown amount={amount2} currency={currency2} onAmountChange={handleAmount2Change} onCurrencyChange={handleCurrency2Change} />
+    <div className='converter-container'>
+      <div className='currency-group'>
+        <h1>From </h1>
+        <CurrencyDropdown amount={amount1} currency={currency1} onAmountChange={handleAmount1Change} onCurrencyChange={handleCurrency1Change} />
+      </div>
+      
+      <div className='currency-group'>
+        <h1>To</h1>
+        <CurrencyDropdown amount={amount2} currency={currency2} onAmountChange={handleAmount2Change} onCurrencyChange={handleCurrency2Change} />
+      </div>
+      
+      
     </div>
   );
 }
