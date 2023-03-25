@@ -187,6 +187,66 @@ export const UNITS = {
       value: "ft/s"
     }
   ],
+  TEMPERATURE_UNITS: [
+    {
+      label: "Degree Celsius - C",
+      value: "C"
+    },
+    {
+      label: "Degree Fahrenheit - F",
+      value: "F"
+    },
+    {
+      label: "Degree Kelvin - K",
+      value: "K"
+    },
+    {
+      label: "Degree Rankine - R",
+      value: "R"
+    }
+  ],
+  TIME_UNITS: [
+    {
+      label: "Nanosecond - nc",
+      value: "nc"
+    },
+    {
+      label: "Microsecond - mu",
+      value: "mu"
+    },
+    {
+      label: "Millisecond - ms",
+      value: "ms"
+    },
+    {
+      label: "Second - s",
+      value: "s"
+    },
+    {
+      label: "Minute - min",
+      value: "min"
+    },
+    {
+      label: "Hour - h",
+      value: "h"
+    },
+    {
+      label: "Day - d",
+      value: "d"
+    },
+    {
+      label: "Week - week",
+      value: "week"
+    },
+    {
+      label: "month - month",
+      value: "month"
+    },
+    {
+      label: "Year - year",
+      value: "year"
+    }
+  ],
   MASS_UNITS: [
     {
       label: "Microgram - mcg",
