@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import convert from "convert-units";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -210,7 +211,10 @@ function Units() {
                   size="large"
                   onClick={onSwapButtonClick}
                 >
-                  <SwapHorizIcon />
+                  <SwapHorizIcon
+                    sx={{ display: { xs: "none", md: "block" } }}
+                  />
+                  <SwapVertIcon sx={{ display: { xs: "block", md: "none" } }} />
                 </IconButton>
               </Grid>
             </Grid>
