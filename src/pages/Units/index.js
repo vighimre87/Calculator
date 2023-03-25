@@ -10,9 +10,6 @@ import Grid from "@mui/material/Grid";
 // import components
 import UnitDropdown from "../../components/UnitDropdown/UnitDropdown";
 
-// import constants
-import { UNITS } from "../../utils/units";
-
 // import styling
 import "./style.css";
 
@@ -20,15 +17,33 @@ function Units() {
   // messages
   const selectDropDownUnitMsg =
     "Please select an unit from both dropdown menus.";
+  // exchange options
+  const exchangeOptions = convert()
+    .measures()
+    .sort()
+    .map((measure) => {
+      return {
+        label: measure.charAt(0).toUpperCase() + measure.slice(1),
+        value: measure
+      };
+    });
 
   // exchange option state management
   const [exchangeOption, setExchangeOption] = useState(
-    UNITS.EXCHANGE_OPTIONS[0].value
+    exchangeOptions[0].value
   );
   useEffect(() => {
     console.log("exchangeOption is changed.....", exchangeOption);
-    const optionName = UNITS[`${exchangeOption.toUpperCase()}_UNITS`];
-    setUnitOptions(optionName);
+    const unitOptions = convert()
+      .list(exchangeOption)
+      .map((option) => {
+        return {
+          label: `${option.singular} - ${option.abbr}`,
+          value: option.abbr
+        };
+      });
+
+    setUnitOptions(unitOptions);
     setLeftUnitOption("");
     setRightUnitOption("");
     updateInputValue("right", "");
@@ -64,11 +79,11 @@ function Units() {
     updateLeftInput();
   }, [rightUnitOption]);
 
-  const leftInputChangeHandler = (event) => {
+  const leftInputChangeHandler = () => {
     updateRightInput();
   };
 
-  const rightInputChangeHandler = (event) => {
+  const rightInputChangeHandler = () => {
     updateLeftInput();
   };
 
@@ -84,6 +99,9 @@ function Units() {
 
   const updateRightInput = () => {
     console.log("updateRightInput.....");
+    console.log("leftUnitOption: ", leftUnitOption);
+    console.log("rightUnitOption: ", rightUnitOption);
+
     if (isInputsValid()) {
       const leftInputValue = getInputValue("left");
       console.log("leftInputValue: ", leftInputValue);
@@ -101,6 +119,8 @@ function Units() {
 
   const updateLeftInput = () => {
     console.log("updateLeftInput.....");
+    console.log("leftUnitOption: ", leftUnitOption);
+    console.log("rightUnitOption: ", rightUnitOption);
 
     if (isInputsValid()) {
       const rightInputValue = getInputValue("right");
@@ -150,13 +170,13 @@ function Units() {
             alignItems="center"
             sx={{ marginBottom: "20px" }}
           >
-            <Grid item xs={8}>
+            <Grid item xs={12} sm={10} md={8} lg={6}>
               <UnitDropdown
                 // exchange option dropdown
                 id="exchange"
                 label="Options"
                 selectedValue={exchangeOption}
-                options={UNITS.EXCHANGE_OPTIONS}
+                options={exchangeOptions}
                 handleChange={(event) => {
                   setExchangeOption(event.target.value);
                 }}
