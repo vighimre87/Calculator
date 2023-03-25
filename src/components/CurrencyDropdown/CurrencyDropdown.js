@@ -15,9 +15,6 @@ function CurrencyDropdown(props) {
   const [currency, setCurrency] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
-  const handleChange = (event) => {
-    setCurrency(event.target.value);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -30,14 +27,12 @@ function CurrencyDropdown(props) {
   return (
     <div>
         <Box
-        component="form"
-        sx={{
-            '& > :not(style)': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-        >
-            <TextField id="standard-basic" label="Amount" variant="standard" value={props.amount} />
+            component="form"
+            sx={{'& > :not(style)': { m: 1, width: '25ch' },}}
+            noValidate
+            autoComplete="off">
+
+            <TextField id="standard-basic" label="Amount" variant="standard" value={props.amount} onChange={ (event) => props.onAmountChange(event.target.value)} />
         </Box>
         <FormControl sx={{ m: 1, minWidth: 250 }}>
             <InputLabel id="currency-label">Currency</InputLabel>
@@ -49,7 +44,7 @@ function CurrencyDropdown(props) {
                 onOpen={handleOpen}
                 value={props.currency}
                 label="currency"
-                onChange={handleChange}
+                onChange={(event) => props.onCurrencyChange(event.target.value)}
                 >
                     <MenuItem value='USD'>US Dollar</MenuItem>
                     <MenuItem value='GBP'>British Pound</MenuItem>
@@ -66,6 +61,8 @@ function CurrencyDropdown(props) {
 CurrencyDropdown.propTypes ={
     amount: PropTypes.number.isRequired,
     currency: PropTypes.string.isRequired,
+    onAmountChange: PropTypes.func,
+    onCurrencyChange: PropTypes.func,
 }
 
 export default CurrencyDropdown;
