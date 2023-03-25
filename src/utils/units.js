@@ -165,6 +165,28 @@ export const UNITS = {
       value: "GW"
     }
   ],
+  SPEED_UNITS: [
+    {
+      label: "Metre per Second - m/s",
+      value: "m/s"
+    },
+    {
+      label: "Kilometre per Hour - km/h",
+      value: "km/h"
+    },
+    {
+      label: "Mile per Hour - m/h",
+      value: "m/h"
+    },
+    {
+      label: "Knot - knot",
+      value: "knot"
+    },
+    {
+      label: "Foot per Second - ft/s",
+      value: "ft/s"
+    }
+  ],
   MASS_UNITS: [
     {
       label: "Microgram - mcg",
