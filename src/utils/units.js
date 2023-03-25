@@ -75,6 +75,44 @@ export const UNITS = {
       value: "mi2"
     }
   ],
+  FREQUENCY_UNITS: [
+    {
+      label: "Hertz - Hz",
+      value: "Hz"
+    },
+    {
+      label: "Millihertz - mHz",
+      value: "mHz"
+    },
+    {
+      label: "Kilohertz - kHz",
+      value: "kHz"
+    },
+    {
+      label: "Megahertz - MHz",
+      value: "MHz"
+    },
+    {
+      label: "Gigahertz - GHz",
+      value: "GHz"
+    },
+    {
+      label: "Terahertz - THz",
+      value: "THz"
+    },
+    {
+      label: "Rotation per Minute - rpm",
+      value: "rpm"
+    },
+    {
+      label: "Degree per Second - deg/s",
+      value: "deg/s"
+    },
+    {
+      label: "Radian per Second - rad/s",
+      value: "rad/s"
+    }
+  ],
   MASS_UNITS: [
     {
       label: "Microgram - mcg",
