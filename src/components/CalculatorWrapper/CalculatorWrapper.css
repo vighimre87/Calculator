@@ -1,8 +1,8 @@
 .calcWrapper {
-  width: 400px;
-  height: 600px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #3b3f71;
-  background-image: linear-gradient(315deg, #475a6e 0%, #435569 74%);
+  height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #9bad69;
+    background-image: linear-gradient(315deg, #e7b563 0%, #89835c 74%);
 }

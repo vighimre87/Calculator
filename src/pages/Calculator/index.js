@@ -11,6 +11,7 @@ import "./style.css";
 
 function Calculator() {
 
+    // creating symbols for the buttons
     const buttonSymbols = [
         ["C", "+/-", "%", "/"],
         ["7", "8", "9", "X"],
@@ -19,9 +20,34 @@ function Calculator() {
         ["0", ".", "="]
     ]
 
+    const [calculate, setCalculate] = useState({
+        symbol: "",
+        number: 0,
+        result: 0,
+    });
+
+    const numberClickHandler = (e) => {
+        e.preventDefault();
+        const clickValue = e.target.innerHTML;
+
+        if (calculate.number.length < 16) {
+            setCalculate({
+                ...calculate,
+                number:
+                calculate.number === 0 && clickValue === "0"
+                ? "0"
+                : calculate.number % 1 === 0
+                ? Number(calculate.number + clickValue)
+                : calculate.number + value,
+                result: !calculate.symbol ? 0 : calculate.result,
+                
+            })
+        }
+    };
+
     return (
         <CalculatorWrapper>
-            <CalculatorScreen value="0"/>
+            <CalculatorScreen value={calculate.number ? calculate.number : calculate.result}/>
             <CalculatorButtonWrapper>
                 {buttonSymbols.flat().map((buttonSymbol, i) => {
                     return (
@@ -30,7 +56,19 @@ function Calculator() {
                         className={buttonSymbol === "=" ? "equals" : ""}
                         value={buttonSymbol}
                         onClick={() => {
-                    console.log(`${buttonSymbol} clicked!`);
+                            buttonSymbol === "C" 
+                            ? resetClickHandler
+                            : buttonSymbol === "+/-"
+                            ? invertClickHandler
+                            : buttonSymbol === "%"
+                            ? percentClickHandler
+                            : buttonSymbol === "="
+                            ? equalsClickHandler
+                            : buttonSymbol === "+" || buttonSymbol === "-" || buttonSymbol === "/" || buttonSymbol === "*"
+                            ? operatorClickHandler
+                            : buttonSymbol === "."
+                            ? decPointClickHandler
+                            : numberClickHandler
                 }}
                 />
                     );
