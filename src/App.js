@@ -23,6 +23,7 @@ function App() {
           <Route path="currency" element={<Currency />} />
           <Route path="units" element={<Units />} />
         </Routes>
+        <Calculator />
         <Footer />
       </div>
     </Router>
