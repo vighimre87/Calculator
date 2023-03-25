@@ -207,8 +207,8 @@ export const UNITS = {
   ],
   TIME_UNITS: [
     {
-      label: "Nanosecond - nc",
-      value: "nc"
+      label: "Nanosecond - ns",
+      value: "ns"
     },
     {
       label: "Microsecond - mu",
@@ -239,7 +239,7 @@ export const UNITS = {
       value: "week"
     },
     {
-      label: "month - month",
+      label: "Month - month",
       value: "month"
     },
     {
