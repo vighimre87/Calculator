@@ -1,18 +1,9 @@
 // import libraries
-import react from "react";
+import React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
-/**
- * properties:
- * id: String,
- * label: String,
- * selectedValue: String,
- * options: Object{label: String, value: String}
- * handleChange: Function
- */
 
 function UnitDropdown(props) {
   return (
@@ -30,7 +21,7 @@ function UnitDropdown(props) {
             <MenuItem
               key={option.value}
               value={option.value}
-            >{`${option.label}(${option.value})`}</MenuItem>
+            >{`${option.label}`}</MenuItem>
           ))}
       </Select>
     </FormControl>
