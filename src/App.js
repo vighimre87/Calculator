@@ -19,9 +19,9 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="calculator" element={<Calculator />} />
-          <Route path="currency" element={<Currency />} />
-          <Route path="units" element={<Units />} />
+          <Route path="/calculator" element={<Calculator />} />
+          <Route path="/currency" element={<Currency />} />
+          <Route path="/units" element={<Units />} />
         </Routes>
         <Calculator />
         <Footer />

@@ -1,131 +1,160 @@
+// import styling
+import "./style.css";
+
 // import libraries
 import React, {useState} from "react";
 import CalculatorButton from "../../components/CalculatorButton/CalculatorButton";
 import CalculatorButtonWrapper from "../../components/CalculatorButtonWrapper/CalculatorButtonWrapper";
 import CalculatorWrapper from "../../components/CalculatorWrapper/CalculatorWrapper";
 import CalculatorScreen from "../../components/CalculatorScreen/CalculatorScreen";
-let basicMath = require('advanced-calculator')
 
-// import styling
-import "./style.css";
-
-
-function Calculator() {
-
-    // creating symbols for the buttons
-    const buttonSymbols = [
-        ["C", "+/-", "%", "/"],
-        ["7", "8", "9", "X"],
-        ["4", "5", "6", "-"],
-        ["1", "2", "3", "+"],
-        ["0", ".", "="]
-    ]
-
-    // Declaring calculating states using useState()
-    const [calculate, setCalculate] = useState({
-        symbol: "",
-        number: 0,
-        result: 0,
+const btnValues = [
+    ["C", "+/-", "%", "/"],
+    [7, 8, 9, "X"],
+    [4, 5, 6, "-"],
+    [1, 2, 3, "+"],
+    [0, ".", "="],
+  ];
+  
+  const toLocaleString = (num) =>
+    String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+  
+  const removeSpaces = (num) => num.toString().replace(/\s/g, "");
+  
+  function Calculator() {
+    let [calc, setCalc] = useState({
+      sign: "",
+      num: 0,
+      res: 0,
     });
-
-
-    // Declaring clickHandlers
-
-    // Clickhandler for number buttons
-    const numberClickHandler = (e) => {
-        e.preventDefault();
-        const clickValue = e.target.innerHTML;
-
-        if (calculate.number.length < 16) {
-            setCalculate({
-                ...calculate,
-                number:
-                calculate.number === 0 && clickValue === "0"
-                ? "0"
-                : calculate.number % 1 === 0
-                ? Number(calculate.number + clickValue)
-                : calculate.number + value,
-                result: !calculate.symbol ? 0 : calculate.result,
-                
-            })
-        }
+  
+    const numClickHandler = (e) => {
+      e.preventDefault();
+      const value = e.target.innerHTML;
+  
+      if (removeSpaces(calc.num).length < 16) {
+        setCalc({
+          ...calc,
+          num:
+            calc.num === 0 && value === "0"
+              ? "0"
+              : removeSpaces(calc.num) % 1 === 0
+              ? toLocaleString(Number(removeSpaces(calc.num + value)))
+              : toLocaleString(calc.num + value),
+          res: !calc.sign ? 0 : calc.res,
+        }, []);
+      }
     };
-
-    // Clickhandler for decimal point button
-    const decPointClickHandler = (e) => {
-        e.preventDefault();
-        const clickValue = e.target.innerHTML;
-
-        setCalculate({
-            ...calculate,
-            number: !calculate.number.toString().includes(".") ? calculate.number + value : calculate.number,
-        });
+  
+    const commaClickHandler = (e) => {
+      e.preventDefault();
+      const value = e.target.innerHTML;
+  
+      setCalc({
+        ...calc,
+        num: !calc.num.toString().includes(".") ? calc.num + value : calc.num,
+      },[]);
     };
-
-    // Clickhandler for operation buttons
-    const operatorClickHandler = (e) => {
-        e.preventDefault();
-        const clickValue = e.target.innerHTML;
-
-        setCalculate({
-            ...calculate,
-            symbol: clickValue,
-            result: !calculate.result && calculate.number ? calculate.number : calculate.result,
-            number: 0,
-        });
+  
+    const signClickHandler = (e) => {
+      e.preventDefault();
+      const value = e.target.innerHTML;
+  
+      setCalc({
+        ...calc,
+        sign: value,
+        res: !calc.res && calc.num ? calc.num : calc.res,
+        num: 0,
+      },[]);
     };
-
+  
     const equalsClickHandler = () => {
-        if(calculate.symbol && calculate.number) {
-            const calculation = (num1, num2, operator) =>
-            operator === "+"
-            ? basicMath.add(num1, num2)
-            : operator === "-"
-            ? basicMath.sub(num1, num2)
-            : operator === "X"
-            ? basicMath.multiply(num1, num2)
-            : basicMath.divide(num1, num2);
-
-            setCalculate({
-                ...calculate,
-                result:
-                calculate.number === "0" && calculate.symbol === "/"
-                ? "You can't divide a number with 0"
-                : calculation(Number(calculate.result), Number(calculate.number), calculate.symbol),
-                symbol: "",
-                number: 0,
-            });
-        }
+      if (calc.sign && calc.num) {
+        const math = (a, b, sign) =>
+          sign === "+"
+            ? a + b
+            : sign === "-"
+            ? a - b
+            : sign === "X"
+            ? a * b
+            : a / b;
+  
+        setCalc({
+          ...calc,
+          res:
+            calc.num === "0" && calc.sign === "/"
+              ? "Can't divide with 0"
+              : toLocaleString(
+                  math(
+                    Number(removeSpaces(calc.res)),
+                    Number(removeSpaces(calc.num)),
+                    calc.sign
+                  )
+                ),
+          sign: "",
+          num: 0,
+        },[]);
+      }
     };
-
+  
+    const invertClickHandler = () => {
+      setCalc({
+        ...calc,
+        num: calc.num ? toLocaleString(removeSpaces(calc.num) * -1) : 0,
+        res: calc.res ? toLocaleString(removeSpaces(calc.res) * -1) : 0,
+        sign: "",
+      },[]);
+    };
+  
+    const percentClickHandler = () => {
+      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+  
+      setCalc({
+        ...calc,
+        num: (num /= Math.pow(100, 1)),
+        res: (res /= Math.pow(100, 1)),
+        sign: "",
+      },[]);
+    };
+  
+    const resetClickHandler = () => {
+      setCalc({
+        ...calc,
+        sign: "",
+        num: 0,
+        res: 0,
+      },[]);
+    };
+  
 
 
     return (
         <main className="calcBox">
         <CalculatorWrapper>
-            <CalculatorScreen value={calculate.number ? calculate.number : calculate.result}/>
+            <CalculatorScreen value={calc.num ? calc.num : calc.res}/>
             <CalculatorButtonWrapper>
-                {buttonSymbols.flat().map((buttonSymbol, i) => {
+                {btnValues.flat().map((btn, i) => {
                     return (
                         <CalculatorButton
                         key={i}
-                        className={buttonSymbol === "=" ? "equals" : ""}
-                        value={buttonSymbol}
-                        onClick={() => {
-                            buttonSymbol === "C" 
-                            ? resetClickHandler
-                            : buttonSymbol === "+/-"
-                            ? invertClickHandler
-                            : buttonSymbol === "%"
-                            ? percentClickHandler
-                            : buttonSymbol === "="
-                            ? equalsClickHandler
-                            : buttonSymbol === "+" || buttonSymbol === "-" || buttonSymbol === "/" || buttonSymbol === "*"
-                            ? operatorClickHandler
-                            : buttonSymbol === "."
-                            ? decPointClickHandler
-                            : numberClickHandler
-                }}
+                        className={btn === "=" ? "equals" : ""}
+                        value={btn}
+                        onClick={
+                            btn === "C"
+                              ? resetClickHandler
+                              : btn === "+/-"
+                              ? invertClickHandler
+                              : btn === "%"
+                              ? percentClickHandler
+                              : btn === "="
+                              ? equalsClickHandler
+                              : btn === "/" || btn === "X" || btn === "-" || btn === "+"
+                              ? signClickHandler
+                              : btn === "."
+                              ? commaClickHandler
+                              : numClickHandler
+                          }
                 />
                     );
                 })}
