@@ -4,7 +4,7 @@
     /* font-family: "Montserrat", sans-serif; */
   }
   
-  body {
+  .calcBox {
     height: 100vh;
     display: flex;
     align-items: center;

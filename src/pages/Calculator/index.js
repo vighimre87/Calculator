@@ -4,6 +4,7 @@ import CalculatorButton from "../../components/CalculatorButton/CalculatorButton
 import CalculatorButtonWrapper from "../../components/CalculatorButtonWrapper/CalculatorButtonWrapper";
 import CalculatorWrapper from "../../components/CalculatorWrapper/CalculatorWrapper";
 import CalculatorScreen from "../../components/CalculatorScreen/CalculatorScreen";
+let basicMath = require('advanced-calculator')
 
 // import styling
 import "./style.css";
@@ -20,12 +21,17 @@ function Calculator() {
         ["0", ".", "="]
     ]
 
+    // Declaring calculating states using useState()
     const [calculate, setCalculate] = useState({
         symbol: "",
         number: 0,
         result: 0,
     });
 
+
+    // Declaring clickHandlers
+
+    // Clickhandler for number buttons
     const numberClickHandler = (e) => {
         e.preventDefault();
         const clickValue = e.target.innerHTML;
@@ -45,7 +51,57 @@ function Calculator() {
         }
     };
 
+    // Clickhandler for decimal point button
+    const decPointClickHandler = (e) => {
+        e.preventDefault();
+        const clickValue = e.target.innerHTML;
+
+        setCalculate({
+            ...calculate,
+            number: !calculate.number.toString().includes(".") ? calculate.number + value : calculate.number,
+        });
+    };
+
+    // Clickhandler for operation buttons
+    const operatorClickHandler = (e) => {
+        e.preventDefault();
+        const clickValue = e.target.innerHTML;
+
+        setCalculate({
+            ...calculate,
+            symbol: clickValue,
+            result: !calculate.result && calculate.number ? calculate.number : calculate.result,
+            number: 0,
+        });
+    };
+
+    const equalsClickHandler = () => {
+        if(calculate.symbol && calculate.number) {
+            const calculation = (num1, num2, operator) =>
+            operator === "+"
+            ? basicMath.add(num1, num2)
+            : operator === "-"
+            ? basicMath.sub(num1, num2)
+            : operator === "X"
+            ? basicMath.multiply(num1, num2)
+            : basicMath.divide(num1, num2);
+
+            setCalculate({
+                ...calculate,
+                result:
+                calculate.number === "0" && calculate.symbol === "/"
+                ? "You can't divide a number with 0"
+                : calculation(Number(calculate.result), Number(calculate.number), calculate.symbol),
+                symbol: "",
+                number: 0,
+            });
+        }
+    };
+
+
+
     return (
+        <main className="calcBox">
         <CalculatorWrapper>
             <CalculatorScreen value={calculate.number ? calculate.number : calculate.result}/>
             <CalculatorButtonWrapper>
@@ -75,6 +131,7 @@ function Calculator() {
                 })}
             </CalculatorButtonWrapper>
         </CalculatorWrapper>
+        </main>
     );
 }
 
