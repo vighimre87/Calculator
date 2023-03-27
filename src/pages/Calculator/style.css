@@ -6,11 +6,20 @@
     font-family: "Montserrat", sans-serif;
   }
   
-  .calcBox {
-    height: 100vh;
+  .calcWrapper {
+  /* margin-left: 100px; */
+  width: 340px;
+  height: 540px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #485461;
+  background-image: linear-gradient(315deg, #485461 0%, #28313b 74%);
+  }
+
+  .pageWrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #9bad69;
-    background-image: linear-gradient(315deg, #e7b563 0%, #89835c 74%);
+    background-color: blanchedalmond;
   }
+

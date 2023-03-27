@@ -130,7 +130,7 @@ const btnValues = [
 
 
     return (
-        <main className="calcBox">
+      <main className="pageWrapper">
         <CalculatorWrapper>
             <CalculatorScreen value={calc.num ? calc.num : calc.res}/>
             <CalculatorButtonWrapper>
@@ -160,7 +160,7 @@ const btnValues = [
                 })}
             </CalculatorButtonWrapper>
         </CalculatorWrapper>
-        </main>
+      </main>
     );
 }
 
