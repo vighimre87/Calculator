@@ -8,7 +8,10 @@ import CalculatorButtonWrapper from "../../components/CalculatorButtonWrapper/Ca
 import CalculatorWrapper from "../../components/CalculatorWrapper/CalculatorWrapper";
 import CalculatorScreen from "../../components/CalculatorScreen/CalculatorScreen";
 
-const btnValues = [
+// The calculator follows similar logic as the next tutorial:
+// https://www.sitepoint.com/react-tutorial-build-calculator-app/
+// Declaring the values for the buttons
+const buttonSymbols = [
     ["C", "+/-", "%", "/"],
     [7, 8, 9, "X"],
     [4, 5, 6, "-"],
@@ -22,108 +25,117 @@ const btnValues = [
   const removeSpaces = (num) => num.toString().replace(/\s/g, "");
   
   function Calculator() {
-    let [calc, setCalc] = useState({
-      sign: "",
-      num: 0,
-      res: 0,
+
+    // Declare useState for the calculation states
+    let [calculation, setCalculation] = useState({
+      symbol: "",
+      number: 0,
+      result: 0,
     });
-  
-    const numClickHandler = (e) => {
+
+    // Clickhandler for number values
+    const numberClickHandler = (e) => {
       e.preventDefault();
-      const value = e.target.innerHTML;
+      const clickValue = e.target.innerHTML;
   
-      if (removeSpaces(calc.num).length < 16) {
-        setCalc({
-          ...calc,
-          num:
-            calc.num === 0 && value === "0"
+      if (removeSpaces(calculation.number).length < 16) {
+        setCalculation({
+          ...calculation,
+          number:
+            calculation.number === 0 && clickValue === "0"
               ? "0"
-              : removeSpaces(calc.num) % 1 === 0
-              ? toLocaleString(Number(removeSpaces(calc.num + value)))
-              : toLocaleString(calc.num + value),
-          res: !calc.sign ? 0 : calc.res,
+              : removeSpaces(calculation.number) % 1 === 0
+              ? toLocaleString(Number(removeSpaces(calculation.number + clickValue)))
+              : toLocaleString(calculation.number + clickValue),
+          result: !calculation.symbol ? 0 : calculation.result,
         }, []);
       }
     };
   
-    const commaClickHandler = (e) => {
+    // Clickhandler for the decimal point button
+    const decPointClickHandler = (e) => {
       e.preventDefault();
-      const value = e.target.innerHTML;
+      const ClickValue = e.target.innerHTML;
   
-      setCalc({
-        ...calc,
-        num: !calc.num.toString().includes(".") ? calc.num + value : calc.num,
+      setCalculation({
+        ...calculation,
+        number: !calculation.number.toString().includes(".") ? calculation.number + ClickValue : calculation.number,
       },[]);
     };
   
-    const signClickHandler = (e) => {
+    // Clickhandler for operators
+    const operatorClickHandler = (e) => {
       e.preventDefault();
-      const value = e.target.innerHTML;
+      const clickValue = e.target.innerHTML;
   
-      setCalc({
-        ...calc,
-        sign: value,
-        res: !calc.res && calc.num ? calc.num : calc.res,
-        num: 0,
+      setCalculation({
+        ...calculation,
+        symbol: clickValue,
+        result: !calculation.result && calculation.number ? calculation.number : calculation.result,
+        number: 0,
       },[]);
     };
   
+    // Clickhandler for the equal button
     const equalsClickHandler = () => {
-      if (calc.sign && calc.num) {
-        const math = (a, b, sign) =>
-          sign === "+"
-            ? a + b
-            : sign === "-"
-            ? a - b
-            : sign === "X"
-            ? a * b
-            : a / b;
+      if (calculation.symbol && calculation.number) {
+        const math = (num1, num2, symbol) =>
+          symbol === "+"
+            ? num1 + num2
+            : symbol === "-"
+            ? num1 - num2
+            : symbol === "X"
+            ? num1 * num2
+            : num1 / num2;
   
-        setCalc({
-          ...calc,
-          res:
-            calc.num === "0" && calc.sign === "/"
-              ? "Can't divide with 0"
+        setCalculation({
+          ...calculation,
+          result:
+            calculation.number === "0" && calculation.symbol === "/"
+              ? "You can't divide with 0"
               : toLocaleString(
                   math(
-                    Number(removeSpaces(calc.res)),
-                    Number(removeSpaces(calc.num)),
-                    calc.sign
+                    Number(removeSpaces(calculation.result)),
+                    Number(removeSpaces(calculation.number)),
+                    calculation.symbol
                   )
                 ),
-          sign: "",
-          num: 0,
+          symbol: "",
+          number: 0,
         },[]);
       }
     };
   
-    const invertClickHandler = () => {
-      setCalc({
-        ...calc,
-        num: calc.num ? toLocaleString(removeSpaces(calc.num) * -1) : 0,
-        res: calc.res ? toLocaleString(removeSpaces(calc.res) * -1) : 0,
-        sign: "",
+    // Clickhandler for prefix
+    const prefixClickHandler = () => {
+      setCalculation({
+        ...calculation,
+        number: calculation.number ? toLocaleString(removeSpaces(calculation.number) * -1) : 0,
+        result: calculation.result ? toLocaleString(removeSpaces(calculation.result) * -1) : 0,
+        symbol: "",
       },[]);
     };
   
+    // Clickhandler for percent button
     const percentClickHandler = () => {
-      let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
-      let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+      let num = calculation.number ? parseFloat(removeSpaces(calculation.number)) : 0;
+      let res = calculation.result ? parseFloat(removeSpaces(calculation.result)) : 0;
   
-      setCalc({
-        ...calc,
-        num: (num /= Math.pow(100, 1)),
-        res: (res /= Math.pow(100, 1)),
-        sign: "",
+      setCalculation({
+        ...calculation,
+        number: (num /= Math.pow(100, 1)),
+        result: (res /= Math.pow(100, 1)),
+        symbol: "",
       },[]);
     };
   
-    const resetClickHandler = () => {
-      setCalc({
-        ...calc,
-        sign: "",
-        num: 0,
-        res: 0,
+    // Clickhandler for the Clear button
+    const clearClickHandler = () => {
+      setCalculation({
+        ...calculation,
+        symbol: "",
+        number: 0,
+        result: 0,
       },[]);
     };
   
@@ -132,28 +144,30 @@ const btnValues = [
     return (
       <main className="pageWrapper">
         <CalculatorWrapper>
-            <CalculatorScreen value={calc.num ? calc.num : calc.res}/>
+            <CalculatorScreen value={calculation.number ? calculation.number : calculation.result}/>
             <CalculatorButtonWrapper>
-                {btnValues.flat().map((btn, i) => {
+                {buttonSymbols.flat().map((symbol, i) => {
                     return (
                         <CalculatorButton
                         key={i}
-                        className={btn === "=" ? "equals" : ""}
-                        value={btn}
+                        className={symbol === "=" ? "equals"
+                        : (symbol === "+" || symbol === "-" || symbol === "/" || symbol === "X")
+                        ? "operator" : ""}
+                        value={symbol}
                         onClick={
-                            btn === "C"
-                              ? resetClickHandler
-                              : btn === "+/-"
-                              ? invertClickHandler
-                              : btn === "%"
+                            symbol === "C"
+                              ? clearClickHandler
+                              : symbol === "+/-"
+                              ? prefixClickHandler
+                              : symbol === "%"
                               ? percentClickHandler
-                              : btn === "="
+                              : symbol === "="
                               ? equalsClickHandler
-                              : btn === "/" || btn === "X" || btn === "-" || btn === "+"
-                              ? signClickHandler
-                              : btn === "."
-                              ? commaClickHandler
-                              : numClickHandler
+                              : symbol === "/" || symbol === "X" || symbol === "-" || symbol === "+"
+                              ? operatorClickHandler
+                              : symbol === "."
+                              ? decPointClickHandler
+                              : numberClickHandler
                           }
                 />
                     );
