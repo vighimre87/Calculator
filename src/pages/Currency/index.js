@@ -7,9 +7,9 @@ import "./style.css";
 
 function Currency() {
     return (
-        <div>
+    <main>
         <ConverterContainer />
-    </div>
+    </main>
     )
 }
 
