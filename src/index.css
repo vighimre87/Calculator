@@ -1,0 +1,14 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#page-body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: blanchedalmond;
+    background-image: linear-gradient(315deg, #ada496 0%, #beb997 74%);
+}
+
