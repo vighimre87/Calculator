@@ -80,15 +80,6 @@ function DrawerAppBar(props) {
       <CssBaseline />
       <AppBar component="nav" sx={{ backgroundColor: "#3F91BF" }}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
           <CalculateIcon className="header-icon" />
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
@@ -107,6 +98,15 @@ function DrawerAppBar(props) {
               </Button>
             ))}
           </Box>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ ml: "auto", display: { sm: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Box component="nav">
