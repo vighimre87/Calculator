@@ -1,0 +1,24 @@
+.header-icon {
+  transform: scale(1.8);
+  margin-right: 5px;
+}
+
+.side-header-icon {
+  transform: scale(1.8);
+  color: #3f91bf;
+  margin-top: 20px;
+}
+
+.header-button.active {
+  color: #fcf944;
+  font-weight: bold;
+}
+
+.side-button.active {
+  background-color: #3f91bf;
+  color: #fcf944;
+}
+
+.side-button.active span {
+  font-weight: bold;
+}
