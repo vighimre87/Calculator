@@ -43,7 +43,7 @@ function DrawerAppBar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <CalculateIcon />
+      <CalculateIcon className="side-header-icon" />
       {/* <Divider /> */}
       <List>
         {navItems.map((item) => (
@@ -70,9 +70,15 @@ function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex", height: { xs: "56px", md: "64px" } }}>
+    <Box
+      sx={{
+        display: "flex",
+
+        height: { xs: "56px", md: "64px" }
+      }}
+    >
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component="nav" sx={{ backgroundColor: "#3F91BF" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -83,7 +89,7 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <CalculateIcon />
+          <CalculateIcon className="header-icon" />
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Button
