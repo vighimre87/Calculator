@@ -12,14 +12,12 @@ import TextField from '@mui/material/TextField';
 
 
 function CurrencyDropdown(props) {
-  const [currency, setCurrency] = React.useState('');
+  
+// useState hook and function for the Material UI Select components 
   const [open, setOpen] = React.useState(false);
-
-
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -31,8 +29,8 @@ function CurrencyDropdown(props) {
             sx={{'& > :not(style)': { m: 1, width: '25ch' },}}
             noValidate
             autoComplete="off">
-
-            <TextField id="standard-basic" label="Amount" variant="standard" value={props.amount} onChange={ (event) => props.onAmountChange(event.target.value)} />
+            {/* set the input type as "number" */}
+            <TextField type="number" label="Amount" variant="standard" value={props.amount} onChange={ (event) => props.onAmountChange(event.target.value)} />
         </Box>
         <FormControl sx={{ m: 1, minWidth: 250 }}>
             <InputLabel id="currency-label">Currency</InputLabel>
