@@ -7,6 +7,7 @@ import CalculatorButton from "../../components/CalculatorButton/CalculatorButton
 import CalculatorButtonWrapper from "../../components/CalculatorButtonWrapper/CalculatorButtonWrapper";
 import CalculatorWrapper from "../../components/CalculatorWrapper/CalculatorWrapper";
 import CalculatorScreen from "../../components/CalculatorScreen/CalculatorScreen";
+let basicMath = require('advanced-calculator')
 
 // The calculator follows similar logic as the next tutorial:
 // https://www.sitepoint.com/react-tutorial-build-calculator-app/
@@ -81,12 +82,12 @@ const buttonSymbols = [
       if (calculation.symbol && calculation.number) {
         const math = (num1, num2, symbol) =>
           symbol === "+"
-            ? num1 + num2
+            ? basicMath.add(num1, num2)
             : symbol === "-"
-            ? num1 - num2
+            ? basicMath.sub(num1, num2)
             : symbol === "X"
-            ? num1 * num2
-            : num1 / num2;
+            ? basicMath.multiply(num1, num2)
+            : basicMath.divide(num1, num2);
   
         setCalculation({
           ...calculation,
