@@ -1,16 +1,24 @@
+// React
 import * as React from 'react';
-import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+// Components
+import CurrencyDropdown from '../CurrencyDropdown/CurrencyDropdown';
+
+// npm package
+import axios from 'axios';
+
+// css style
 import './ConverterContainer.css'
 
 function ConverterContainer() {
 
+  // React hooks to track the amounts of money and the currencies 
   const [amount1, setAmount1] = useState(1);
   const [amount2, setAmount2] = useState(1);
   const [currency1, setCurrency1] = useState('USD');
   const [currency2, setCurrency2] = useState('USD');
+  // React hook to track the latest currency rates
   const [rates, setRates] = useState([]);
 
   useEffect(() => {
@@ -61,8 +69,6 @@ function ConverterContainer() {
         <h1>To</h1>
         <CurrencyDropdown amount={amount2} currency={currency2} onAmountChange={handleAmount2Change} onCurrencyChange={handleCurrency2Change} />
       </div>
-      
-      
     </div>
   );
 }
