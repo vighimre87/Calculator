@@ -1,0 +1,13 @@
+.header-button.active {
+  color: #fcf944;
+  font-weight: bold;
+}
+
+.side-button.active {
+  background-color: #1976d2;
+  color: #fcf944;
+}
+
+.side-button.active span {
+  font-weight: bold;
+}
