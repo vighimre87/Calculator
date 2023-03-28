@@ -17,6 +17,8 @@ import "./style.css";
 import { CardContent } from "@mui/material";
 
 function Units() {
+  const UNITS_LOCAL_STORAGE_ID = "PIXEL_PIONEERS_UNITS";
+
   // messages
   const selectDropDownUnitMsg =
     "Please select an unit from both dropdown menus.";
@@ -31,12 +33,14 @@ function Units() {
       };
     });
 
-  // exchange option state management
-  const [exchangeOption, setExchangeOption] = useState(
-    exchangeOptions[0].value
+  const [isUserModifyExchangeOption, setIsUserModifyExchangeOption] = useState(
+    false
   );
-  useEffect(() => {
-    const unitOptions = convert()
+
+  // exchange option state management
+  const [exchangeOption, setExchangeOption] = useState("");
+  const getUnitOptions = (exchangeOption) => {
+    return convert()
       .list(exchangeOption)
       .map((option) => {
         return {
@@ -44,12 +48,16 @@ function Units() {
           value: option.abbr
         };
       });
-
-    setUnitOptions(unitOptions);
-    setLeftUnitOption("");
-    setRightUnitOption("");
-    updateInputValue("right", "");
-    updateInputValue("left", "");
+  };
+  // exchangeOptions[0].value
+  useEffect(() => {
+    if (isUserModifyExchangeOption) {
+      setUnitOptions(getUnitOptions(exchangeOption));
+      setLeftUnitOption("");
+      setRightUnitOption("");
+      updateInputValue("right", "");
+      updateInputValue("left", "");
+    }
   }, [exchangeOption]);
 
   // unit options state management
@@ -90,8 +98,10 @@ function Units() {
   // update input fields
   const isInputsValid = () => leftUnitOption && rightUnitOption;
   const updateInputValue = (direction, value) => {
-    const input = document.querySelector(`#${direction}-number`);
-    input.value = value;
+    const inputEl = document.querySelector(`#${direction}-number`);
+    if (inputEl) {
+      inputEl.value = value;
+    }
   };
   const getInputValue = (direction) => {
     return +document.querySelector(`#${direction}-number`).value;
@@ -107,6 +117,14 @@ function Units() {
           .to(rightUnitOption);
 
         updateInputValue("right", newRightInputValue);
+
+        setLocalStorage({
+          exchangeOption,
+          leftUnitOption,
+          rightUnitOption,
+          leftInputValue: leftInputValue,
+          rightInputValue: newRightInputValue
+        });
       }
     }
   };
@@ -121,6 +139,14 @@ function Units() {
           .to(leftUnitOption);
 
         updateInputValue("left", newLeftInputValue);
+
+        setLocalStorage({
+          exchangeOption,
+          leftUnitOption,
+          rightUnitOption,
+          leftInputValue: newLeftInputValue,
+          rightInputValue: rightInputValue
+        });
       }
     }
   };
@@ -135,7 +161,44 @@ function Units() {
     updateInputValue("right", leftInputValueCurr);
     setRightUnitOption(leftUnitOptionCurr);
     updateInputValue("left", rightInputValueCurr);
+
+    setLocalStorage({
+      exchangeOption,
+      leftUnitOption: rightUnitOptionCurr,
+      rightUnitOption: leftUnitOptionCurr,
+      leftInputValue: rightInputValueCurr,
+      rightInputValue: leftInputValueCurr
+    });
   };
+
+  // local storage
+  const setLocalStorage = (obj) => {
+    if (obj) localStorage.setItem(UNITS_LOCAL_STORAGE_ID, JSON.stringify(obj));
+  };
+
+  const restoreLocalStorage = () => {
+    const storageStr = localStorage.getItem(UNITS_LOCAL_STORAGE_ID);
+
+    if (storageStr && storageStr.length > 0) {
+      const storageObj = JSON.parse(storageStr);
+
+      setExchangeOption(storageObj.exchangeOption);
+      setUnitOptions(getUnitOptions(storageObj.exchangeOption));
+      setLeftUnitOption(storageObj.leftUnitOption);
+      setRightUnitOption(storageObj.rightUnitOption);
+      updateInputValue("left", storageObj.leftInputValue);
+      updateInputValue("right", storageObj.rightInputValue);
+    } else {
+      const exchangeOption = exchangeOptions[0].value;
+
+      setExchangeOption(exchangeOption);
+      setUnitOptions(getUnitOptions(exchangeOption));
+    }
+  };
+
+  useEffect(() => {
+    restoreLocalStorage();
+  }, []);
 
   return (
     <div>
@@ -167,6 +230,7 @@ function Units() {
                 selectedValue={exchangeOption}
                 options={exchangeOptions}
                 handleChange={(event) => {
+                  setIsUserModifyExchangeOption(true);
                   setExchangeOption(event.target.value);
                 }}
               />
