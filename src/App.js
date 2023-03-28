@@ -15,13 +15,13 @@ import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <Router>
-      <div>
+      <div id="page-body">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="calculator" element={<Calculator />} />
-          <Route path="currency" element={<Currency />} />
-          <Route path="units" element={<Units />} />
+          <Route path="/calculator" element={<Calculator />} />
+          <Route path="/currency" element={<Currency />} />
+          <Route path="/units" element={<Units />} />
         </Routes>
         <Footer />
       </div>

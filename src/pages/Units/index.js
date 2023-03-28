@@ -33,9 +33,8 @@ function Units() {
       };
     });
 
-  const [isUserModifyExchangeOption, setIsUserModifyExchangeOption] = useState(
-    false
-  );
+  const [isUserModifyExchangeOption, setIsUserModifyExchangeOption] =
+    useState(false);
 
   // exchange option state management
   const [exchangeOption, setExchangeOption] = useState("");
@@ -58,7 +57,7 @@ function Units() {
       updateInputValue("right", "");
       updateInputValue("left", "");
     }
-  }, [exchangeOption]);
+  }, [exchangeOption, isUserModifyExchangeOption]);
 
   // unit options state management
   const [unitOptions, setUnitOptions] = useState();
@@ -222,7 +221,18 @@ function Units() {
             alignItems="center"
             sx={{ marginBottom: "20px" }}
           >
-            <Grid item xs={12} sm={10} md={8} lg={6}>
+            <Grid
+              item
+              xs={12}
+              sm={10}
+              md={8}
+              lg={6}
+              sx={{
+                backgroundColor: "cornsilk",
+                padding: "15px",
+                borderRadius: "3px"
+              }}
+            >
               <UnitDropdown
                 // exchange option dropdown
                 id="exchange"
@@ -237,12 +247,21 @@ function Units() {
             </Grid>
           </Grid>
 
-          <Grid container directin="row" justifyContent="space-around">
-            <Grid item>
-              <Card
-                variant="outlined"
-                sx={{ backgroundColor: "rgb(240,248,255, 0.4)" }}
-              >
+          <Grid
+            container
+            directin="row"
+            justifyContent="space-around"
+            sx={{ maxWidth: "980px", marginLeft: "auto", marginRight: "auto" }}
+          >
+            <Grid
+              item
+              sx={{
+                marginTop: "auto",
+                marginBottom: "auto",
+                minWidth: "250px"
+              }}
+            >
+              <Card variant="outlined" sx={{ backgroundColor: "cornsilk" }}>
                 <CardContent>
                   <Grid container direction="column">
                     <UnitDropdown
@@ -275,9 +294,19 @@ function Units() {
               </Card>
             </Grid>
 
-            <Grid item xs={12} sm={12} md="auto">
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md="auto"
+              sx={{ marginTop: "auto", marginBottom: "auto" }}
+            >
               <Grid container justifyContent="center" alignItems="center">
                 <IconButton
+                  sx={{
+                    backgroundColor: "cornsilk",
+                    margin: "10px"
+                  }}
                   color="primary"
                   aria-label="upload picture"
                   component="label"
@@ -285,18 +314,27 @@ function Units() {
                   onClick={onSwapButtonClick}
                 >
                   <SwapHorizIcon
-                    sx={{ display: { xs: "none", md: "block" } }}
+                    sx={{
+                      display: {
+                        xs: "none",
+                        md: "block"
+                      }
+                    }}
                   />
                   <SwapVertIcon sx={{ display: { xs: "block", md: "none" } }} />
                 </IconButton>
               </Grid>
             </Grid>
 
-            <Grid item>
-              <Card
-                variant="outlined"
-                sx={{ backgroundColor: "rgb(240,248,255, 0.4)" }}
-              >
+            <Grid
+              item
+              sx={{
+                marginTop: "auto",
+                marginBottom: "auto",
+                minWidth: "250px"
+              }}
+            >
+              <Card variant="outlined" sx={{ backgroundColor: "cornsilk" }}>
                 <CardContent>
                   <Grid container direction="column">
                     <UnitDropdown
