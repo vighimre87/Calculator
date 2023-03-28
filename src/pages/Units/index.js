@@ -33,9 +33,8 @@ function Units() {
       };
     });
 
-  const [isUserModifyExchangeOption, setIsUserModifyExchangeOption] = useState(
-    false
-  );
+  const [isUserModifyExchangeOption, setIsUserModifyExchangeOption] =
+    useState(false);
 
   // exchange option state management
   const [exchangeOption, setExchangeOption] = useState("");
@@ -58,7 +57,7 @@ function Units() {
       updateInputValue("right", "");
       updateInputValue("left", "");
     }
-  }, [exchangeOption]);
+  }, [exchangeOption, isUserModifyExchangeOption]);
 
   // unit options state management
   const [unitOptions, setUnitOptions] = useState();
