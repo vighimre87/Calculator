@@ -129,7 +129,7 @@ There are no tests for this project but feel free to add your own tests.
 
 ## Deployment
 
-Please view our application here: https://clevercalc.netlify.app/
+Please view our application [here](https://clevercalc.netlify.app/) and our presentation slide [here](https://docs.google.com/presentation/d/10j6A6yXKb4e0Ppc28Z4JiGvOUALO6ViayOcd1zh-AiY/edit?usp=sharing).
 
 ## License
 
