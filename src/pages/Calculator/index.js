@@ -20,10 +20,19 @@ const buttonSymbols = [
     [0, ".", "="],
   ];
   
-  const toLocaleString = (num) =>
-    String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+  const toLocaleString = (number) =>
+    String(number).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
   
-  const removeSpaces = (num) => num.toString().replace(/\s/g, "");
+  const removeSpaces = (number) => number.toString().replace(/\s/g, "");
+
+  const operations = (num1, num2, symbol) =>
+          symbol === "+"
+            ? basicMath.add(num1, num2)
+            : symbol === "-"
+            ? basicMath.sub(num1, num2)
+            : symbol === "X"
+            ? basicMath.multiply(num1, num2)
+            : basicMath.divide(num1, num2);
   
   function Calculator() {
 
@@ -43,9 +52,7 @@ const buttonSymbols = [
         setCalculation({
           ...calculation,
           number:
-            calculation.number === 0 && clickValue === "0"
-              ? "0"
-              : removeSpaces(calculation.number) % 1 === 0
+            removeSpaces(calculation.number) % 1 === 0 && !calculation.number.toString().includes(".")
               ? toLocaleString(Number(removeSpaces(calculation.number + clickValue)))
               : toLocaleString(calculation.number + clickValue),
           result: !calculation.symbol ? 0 : calculation.result,
@@ -72,7 +79,9 @@ const buttonSymbols = [
       setCalculation({
         ...calculation,
         symbol: clickValue,
-        result: !calculation.result && calculation.number ? calculation.number : calculation.result,
+        result: !calculation.number ? calculation.result : !calculation.result ? calculation.number
+        // If user chains operations then the operator button will behave as the equal button
+        : toLocaleString(operations(Number(removeSpaces(calculation.result)), Number(removeSpaces(calculation.number)), calculation.symbol)),
         number: 0,
       },[]);
     };
@@ -80,22 +89,15 @@ const buttonSymbols = [
     // Clickhandler for the equal button
     const equalsClickHandler = () => {
       if (calculation.symbol && calculation.number) {
-        const math = (num1, num2, symbol) =>
-          symbol === "+"
-            ? basicMath.add(num1, num2)
-            : symbol === "-"
-            ? basicMath.sub(num1, num2)
-            : symbol === "X"
-            ? basicMath.multiply(num1, num2)
-            : basicMath.divide(num1, num2);
   
         setCalculation({
           ...calculation,
           result:
+          // Checking if user trying to divide with 0
             calculation.number === "0" && calculation.symbol === "/"
               ? "You can't divide with 0"
               : toLocaleString(
-                  math(
+                  operations(
                     Number(removeSpaces(calculation.result)),
                     Number(removeSpaces(calculation.number)),
                     calculation.symbol
