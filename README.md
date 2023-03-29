@@ -56,7 +56,7 @@ Overall, this application is a useful tool for anyone who needs to quickly and e
   npm start
   ``` 
 
-## Languages/Technologies
+## Technologies
 In this project, we used the following technologies:
 * HTML
 * CSS
