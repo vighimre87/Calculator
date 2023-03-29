@@ -1,20 +1,38 @@
 .welcomeBoardContainer {
     height: auto;
-    max-width: 100%;
+    max-width: 250px;
     display: flex;
     justify-content: flex-end;
-    margin-top: 100px;
-    margin-right: 100px;
+    margin-bottom: 20px;
 }
 
 img {
-    width: 600px;
+    width: 450px;
     height: 600px;
-    position: absolute;
 }
 
 .imgContainer {
     display: flex;
-    justify-content: center;
-    padding-right: 200px;
+    margin-bottom: 20px;
+}
+
+.homePageContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 850px) {
+    img {
+        width: 350px;
+        height: 420px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    img {
+        width: 250px;
+        height: 300px;
+    }
 }
